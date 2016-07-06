@@ -1,0 +1,15 @@
+<div class="logmod" id="status">
+<div class="logmod__wrapper">
+  <span class="logmod__close">Close</span>
+  <div class="logmod__container">
+    <div align='center'>Welcome to Raydar, <span id='fullname'></span></div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  $.get( "/user/profile", function(resData) {
+     $('#fullname').html(resData.data.fullName);
+  }).fail(function(resData) {
+    // TODO: redirect to home page
+  });
+</script>

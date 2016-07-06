@@ -1,0 +1,86 @@
+
+<div class="logmod" id="status">
+<div class="logmod__wrapper">
+  <span class="logmod__close">Close</span>
+  <div class="logmod__container">
+    <ul class="logmod__tabs">
+      <li data-tabtar="lgm-2"><a href="#">Profile</a></li>
+    </ul>
+    <div id='error' style='color: red;' align='center'></div>
+
+    <div class="logmod__tab-wrapper">
+    <div class="logmod__tab lgm-2">
+      <div class="logmod__heading">
+        
+      </div> 
+      <div class="logmod__form">
+        <form accept-charset="utf-8" class="simform">
+          <div class="sminputs">
+            <div class="input full">
+              <label class="string optional" >Full name</label>
+              <input class="string optional" maxlength="255" name="user-pwd" id="fullname" placeholder="Full name" type="text" size="50" />
+            </div>
+          </div>
+          <div class="sminputs">
+            <div class="input full">
+              <label class="string optional" >Email</label>
+              <input class="string optional" maxlength="255" name="email" id="email" placeholder="Email" type="email" size="50" />
+            </div>
+          </div>
+          <div class="sminputs add-password">
+            <div class="input full">
+              <label class="string optional" >Password</label>
+              <input class="string optional" maxlength="255" name="password" id="password" placeholder="password" type="password" size="50" />
+            </div>
+          </div>
+          <div class="simform__actions">
+            <button class="sumbit" id='change-profile'name="commit" type="sumbit" value="Change">Change</button> 
+          </div> 
+        </form>
+      </div> 
+      
+        </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $.get( "/user/profile", function(resData) {
+     $('#fullname').val(resData.data.fullName);
+     $('#email').val(resData.data.email);
+
+     if (resData.code != 20006) {
+        hasPassword = true;
+        $('.add-password').remove();
+     }
+
+  }).fail(function(resData) {
+    // TODO: redirect to home page
+  });
+
+  $('#change-profile').click(function(e) {
+    e.preventDefault();
+    var data = {
+      fullName: $('#fullname').val(),
+      email: $('#email').val(),
+      password: $('#password').val() || '',
+    };
+
+    $.post( "/user/profile", data, function(resData) {
+      window.location = '/welcome';
+    })
+    .fail(function(resData) {
+        if (resData.responseJSON.code == 400) {
+          $('#error').html(JSON.stringify(resData.responseJSON.data));
+        } else {
+          $('#error').html(resData.responseJSON.message);
+        }
+        
+    });
+  });
+  
+</script>
+
+</div>
+  
+  

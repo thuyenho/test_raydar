@@ -1,0 +1,12 @@
+{
+	"Welcome": "Welcome",
+	"A brand new app.": "A brand new app.",
+	"user.email.unique": "Email already exists",
+
+	"PASSWORD_NOT_MATCH": "Password do not match",
+	"ACCOUNT_NOT_EXIST": "Email does not exist",
+	"INCORRECT_PASSWORD": "Password is incorrect",
+	"user.password.minLength": "Password is less than 8 character",
+	"user.email.email": "Invalid email",
+	"INVALID_PARAM": "Please type all of fields"
+}
